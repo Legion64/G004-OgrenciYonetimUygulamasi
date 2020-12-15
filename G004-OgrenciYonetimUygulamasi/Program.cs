@@ -8,7 +8,9 @@ namespace G004_OgrenciYonetimUygulamasi
         {
             Console.WriteLine("Hello World!");
 
-            //asdasd
         }
+
+        
+            //Öğrenci Listeleme
     }
 }
