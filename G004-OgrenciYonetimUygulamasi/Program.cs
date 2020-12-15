@@ -6,7 +6,7 @@ namespace G004_OgrenciYonetimUygulamasi
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!"); // Deneme
+            Console.WriteLine("Hello World!");
 
         }
 
