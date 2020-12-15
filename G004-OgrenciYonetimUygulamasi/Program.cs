@@ -6,7 +6,7 @@ namespace G004_OgrenciYonetimUygulamasi
 {
     class Program
     {
-        StudentManager SM = new StudentManager();
+        static StudentManager SM = new StudentManager();
 
         // Bu sınıf verilerin işlemleri tamamlanınca dönen sonuca göre kontrol mekanizmasını çalıştırdığımız alan
         // Örnek: Öğrenci ekleme işlemi başarılıysa 'true' döner. -> Kontrolü yaparken 'true' ise işlem başarılı yazdırsın
@@ -38,10 +38,10 @@ namespace G004_OgrenciYonetimUygulamasi
 
                             break;
                         case 2:
-
+                            AddStudentNote();
                             break;
                         case 3:
-
+                            GetStudentGA();
                             break;
                         case 4:
 
@@ -104,6 +104,8 @@ namespace G004_OgrenciYonetimUygulamasi
                             Console.WriteLine("Herhangi bir seçim yapmadınız!");
                             break;
                     }
+
+                    StopOrContinue();
                 }
                 else
                 {
@@ -119,24 +121,20 @@ namespace G004_OgrenciYonetimUygulamasi
             }
         }
 
-        static void Run(Action callback)
+        static void StopOrContinue()
         {
-            callback();
-
             while (true)
             {
                 Console.WriteLine("Menüyü tekrar listelemek için \"liste\", çıkış yapmak için \"çıkış\" yazın.");
                 Console.Write("Yapmak istediğiniz işlemi seçin: ");
-                string input = Console.ReadLine();
-                if (input == "liste")
+                string _input = Console.ReadLine();
+                if (_input == "liste")
                 {
                     RunAll();
-                    break;
                 }
-                else if (input == "çıkış")
+                else if (_input == "çıkış")
                 {
                     ExitApp();
-                    break;
                 }
                 else
                 {
@@ -170,6 +168,129 @@ namespace G004_OgrenciYonetimUygulamasi
             Console.WriteLine("20 - Öğrencinin okuduğu son kitabı görüntüle");
             Console.WriteLine("21 - Öğrenci sil");
             Console.WriteLine("22 - Öğrenci güncelle");
+        }
+
+        static void AddStudentNote()
+        {
+            Console.WriteLine("\nNot Girişi");
+            while (true)
+            {
+                Console.Write("\nÖğrenci numarası: ");
+                if (int.TryParse(Console.ReadLine(), out int id))
+                {
+                    if (SM.HasStudent(id))
+                    {
+                        Console.Write("Eklemek istediğiniz ders adı: ");
+                        if (Enum.TryParse(Console.ReadLine(), true, out LessonName lesson) && Enum.IsDefined(typeof(LessonName), lesson))
+                        {
+                            Console.Write("Eklemek istediğiniz not adedi: ");
+                            if (int.TryParse(Console.ReadLine(), out int counter))
+                            {
+                                int[] notes = new int[counter];
+                                for (int i = 0; i < counter; i++)
+                                {
+                                    while (true)
+                                    {
+                                        Console.Write("{0}. Notu girin: ", i + 1);
+                                        if (int.TryParse(Console.ReadLine(), out int note))
+                                        {
+                                            if (note >= 0 && note <= 100)
+                                            {
+                                                notes[i] = note;
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Girdiğiniz değer 0 ve 100 arasında olmalıdır.");
+                                            }
+                                        }
+                                        else
+                                            Console.WriteLine("Sayı tipinde bir değer girmelisiniz!");
+                                    }
+                                }
+
+                                SM.AddNote(id, lesson, notes);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Sayı tipinde bir değer girmelisiniz!");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Bu ders sisteme kayıtlı değil!");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sayı tipinde bir değer girmelisiniz!");
+                }
+            }
+        }
+
+        static void GetStudentGA()
+        {
+            while (true)
+            {
+                Console.Write("\nÖğrenci numarası: ");
+                if (int.TryParse(Console.ReadLine(), out int id))
+                {
+                    if (SM.HasStudent(id))
+                    {
+                        Console.WriteLine("Öğrencinin not ortalaması: {0}", SM.GetStudent(id).GA);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sayı tipinde bir değer girmelisiniz!");
+                }
+            }
+        }
+
+        static void AddStudentAddress()
+        {
+            while (true)
+            {
+                Console.Write("\nÖğrenci numarası: ");
+                if (int.TryParse(Console.ReadLine(), out int id))
+                {
+                    if (SM.HasStudent(id))
+                    {
+                        Console.Write("İl: ");
+                        string province = Console.ReadLine();
+
+                        Console.Write("İlçe: ");
+                        string district = Console.ReadLine();
+
+                        Console.Write("Mahalle: ");
+                        string neighborhood = Console.ReadLine();
+
+
+                        Address address = new Address(province, district, neighborhood);
+
+                        SM.AddAddress(id, address);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sayı tipinde bir değer girmelisiniz!");
+                }
+            }
         }
 
         static void ExitApp()

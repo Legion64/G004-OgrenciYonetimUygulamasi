@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace G004_OgrenciYonetimUygulamasi.component
@@ -18,6 +19,14 @@ namespace G004_OgrenciYonetimUygulamasi.component
 
         public string ClassName { get; set; }
 
+
+        public float GA
+        {
+            get
+            {
+                return Lessons.Count > 0 ? Lessons.Average(x => x.Note) : 0;
+            }
+        }
 
         public List<Lesson> Lessons { get; set; }
 
