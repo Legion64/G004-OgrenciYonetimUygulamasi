@@ -7,15 +7,6 @@ namespace G004_OgrenciYonetimUygulamasi
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-
         }
-
-        
-            //Değerledirme
-            //akın
-
-
-        // ASDASD asdasd
-
     }
 }
