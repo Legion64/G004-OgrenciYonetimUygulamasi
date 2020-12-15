@@ -6,4 +6,8 @@
     <RootNamespace>G004_OgrenciYonetimUygulamasi</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
 </Project>
