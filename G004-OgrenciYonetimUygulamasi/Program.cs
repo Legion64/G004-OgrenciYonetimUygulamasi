@@ -12,6 +12,7 @@ namespace G004_OgrenciYonetimUygulamasi
 
         
             //Değerledirme
+            //akın
 
     }
 }
