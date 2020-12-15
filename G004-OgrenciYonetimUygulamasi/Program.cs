@@ -44,7 +44,7 @@ namespace G004_OgrenciYonetimUygulamasi
                             GetStudentGA();
                             break;
                         case 4:
-
+                            AddStudentAddress();
                             break;
                         case 5:
 
@@ -280,6 +280,7 @@ namespace G004_OgrenciYonetimUygulamasi
                         Address address = new Address(province, district, neighborhood);
 
                         SM.AddAddress(id, address);
+                        break;
                     }
                     else
                     {
