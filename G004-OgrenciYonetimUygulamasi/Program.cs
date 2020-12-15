@@ -11,6 +11,7 @@ namespace G004_OgrenciYonetimUygulamasi
         }
 
         
-            //Öğrenci Listeleme
+            //Değerledirme
+
     }
 }
