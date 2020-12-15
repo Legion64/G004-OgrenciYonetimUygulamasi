@@ -13,5 +13,8 @@ namespace G004_OgrenciYonetimUygulamasi
         
             //Değerledirme
 
+
+        // ASDASD asdasd
+
     }
 }
