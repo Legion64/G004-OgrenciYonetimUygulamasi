@@ -93,7 +93,7 @@ namespace G004_OgrenciYonetimUygulamasi
                             GetBooks();
                             break;
                         case 20:
-
+                            GetLastBook();
                             break;
                         case 21:
 
@@ -336,7 +336,7 @@ namespace G004_OgrenciYonetimUygulamasi
                         foreach (var item in SM.GetStudent(id).Reviews)
                         {
                             i++;
-                            Console.WriteLine("{0} - {1}", i, item);
+                            Console.WriteLine("\n {0} - {1}\n", i, item);
                         }
                         break;
                     }
@@ -363,7 +363,7 @@ namespace G004_OgrenciYonetimUygulamasi
                     {
                         Console.WriteLine("Kitap giriniz.");
                         string book = Console.ReadLine();
-                        SM.AddBooks(id,book);
+                        SM.AddBooks(id, book);
                         break;
                     }
                     else
@@ -377,7 +377,7 @@ namespace G004_OgrenciYonetimUygulamasi
                 }
             }
         }
-        
+
         static void GetBooks()
         {
             while (true)
@@ -391,7 +391,7 @@ namespace G004_OgrenciYonetimUygulamasi
                         foreach (var item in SM.GetStudent(id).Books)
                         {
                             i++;
-                            Console.WriteLine("{0} - {1}", i, item);
+                            Console.WriteLine("\n{0} - {1}\n", i, item);
                         }
                         break;
                     }
@@ -409,15 +409,15 @@ namespace G004_OgrenciYonetimUygulamasi
 
         static void GetLastBook()
         {
-        while (true)
+            while (true)
             {
                 Console.Write("Ogrenci Numarası : ");
                 if (int.TryParse(Console.ReadLine(), out int id))
                 {
                     if (SM.HasStudent(id))
                     {
-                        
-                        
+                        Console.WriteLine("Öğrencinin okuduğu son kitap: {0} ", SM.GetLastBook(id));
+                        break;
                     }
                     else
                     {
@@ -445,20 +445,20 @@ namespace G004_OgrenciYonetimUygulamasi
             StudentManager ogrenci = new StudentManager();
 
             Console.Write("Öğrencinin numarası: ");
-            bool dorumunumara = int.TryParse(Console.ReadLine() , out int numara);
+            bool dorumunumara = int.TryParse(Console.ReadLine(), out int numara);
             Console.Write("Öğrencinin adı:  ");
             string ad = Console.ReadLine();
             Console.Write("Öğrencinin soyadı:  ");
             string soyad = Console.ReadLine();
             Console.Write("Öğrencinin doğum tarihi:  ");
-            bool dorumutarih = DateTime.TryParse(Console.ReadLine() , out DateTime dogumTarihi);
+            bool dorumutarih = DateTime.TryParse(Console.ReadLine(), out DateTime dogumTarihi);
             Console.Write("Öğrencinin cinsiyeti:  ");
             string cinsiyet = Console.ReadLine();
             Gender gender = (Gender)Enum.Parse(typeof(Gender), cinsiyet);
             Console.Write("Öğrencinin şubesi:  ");
             string sınıf = Console.ReadLine();
 
-            ogrenci.AddStudent(ad, soyad , dogumTarihi, gender, numara, sınıf);
+            ogrenci.AddStudent(ad, soyad, dogumTarihi, gender, numara, sınıf);
 
         }
     }
