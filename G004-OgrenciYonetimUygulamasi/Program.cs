@@ -302,36 +302,6 @@ namespace G004_OgrenciYonetimUygulamasi
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         static void AddStudent()
         {
             StudentManager ogrenci = new StudentManager();
