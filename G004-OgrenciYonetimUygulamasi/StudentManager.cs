@@ -77,10 +77,17 @@ namespace G004_OgrenciYonetimUygulamasi
             student.Reviews.Add(text);
         }
 
-        public void AddBooks(int id , string book)
+        public void AddBooks(int id, string book)
         {
             Student student = GetStudent(id);
             student.Books.Add(book);
+
+        }
+
+        public string GetLastBook(int id)
+        {
+            Student student = GetStudent(id);
+            return student.Books.Last();
         }
         public bool HasStudent(int id)
         {
@@ -93,11 +100,11 @@ namespace G004_OgrenciYonetimUygulamasi
 
 
 
-        public void AddStudent(string name, string surname, DateTime birthDate, Gender gender , int Id ,string className)
+        public void AddStudent(string name, string surname, DateTime birthDate, Gender gender, int Id, string className)
         {
             Random rnd = new Random();
             Student student = new Student();
-             
+
             student.Name = name;
             student.Surname = surname;
             student.BirthDate = birthDate;
