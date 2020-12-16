@@ -7,9 +7,6 @@ namespace G004_OgrenciYonetimUygulamasi
     {
         static StudentManager SM = new StudentManager();
 
-        // Bu sınıf verilerin işlemleri tamamlanınca dönen sonuca göre kontrol mekanizmasını çalıştırdığımız alan
-        // Örnek: Öğrenci ekleme işlemi başarılıysa 'true' döner. -> Kontrolü yaparken 'true' ise işlem başarılı yazdırsın
-
         static void Main(string[] args)
         {
             RunAll();
@@ -64,7 +61,7 @@ namespace G004_OgrenciYonetimUygulamasi
                             StudentsByBirthDate();
                             break;
                         case 11:
-                            StudentsByNeighborhood();                            
+                            StudentsByNeighborhood();
                             break;
                         case 12:
                             MostSuccessfulInSchool();
@@ -440,8 +437,6 @@ namespace G004_OgrenciYonetimUygulamasi
 
         static void AddStudent()
         {
-            StudentManager ogrenci = new StudentManager();
-
             Console.Write("Öğrencinin numarası: ");
             bool dorumunumara = int.TryParse(Console.ReadLine(), out int numara);
             Console.Write("Öğrencinin adı:  ");
@@ -456,7 +451,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Console.Write("Öğrencinin şubesi:  ");
             string sınıf = Console.ReadLine();
 
-            ogrenci.AddStudent(ad, soyad, dogumTarihi, gender, numara, sınıf);
+            SM.AddStudent(ad, soyad, dogumTarihi, gender, numara, sınıf);
 
         }
 
@@ -465,18 +460,18 @@ namespace G004_OgrenciYonetimUygulamasi
             ListHeader();
             foreach (var student in SM.Students)
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count, 5}");
+                DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
         static void StudentsByClass()
         {
-            ListHeader();
             Console.Write("Görmek istediğiniz şubeyi girin: ");
             string className = Console.ReadLine();
+            ListHeader();
             foreach (var student in SM.StudentsByClass(className))
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count,5}");
+                DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
@@ -485,20 +480,29 @@ namespace G004_OgrenciYonetimUygulamasi
             ListHeader();
             foreach (var student in SM.GetNeighborhood())
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count,5}");
+                DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
             }
 
         }
 
-        static void StudentsByBirthDate()
+        static object StudentsByBirthDate()
         {
-            ListHeader();
             Console.Write("Tarih sınırını girin: ");
-            DateTime date = DateTime.Parse(Console.ReadLine());
-            foreach (var student in SM.BirthDateListing(date))
+            bool dateChecker = DateTime.TryParse(Console.ReadLine(), out DateTime birthDate);
+
+            if (!dateChecker)
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count,5}");
+                Console.WriteLine("Girilen tarih geçersiz! Lütfen bir daha deneyin.");
+                return StudentsByBirthDate();
             }
+
+            ListHeader();
+            foreach (var student in SM.BirthDateListing(birthDate))
+            {
+                DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+            }
+
+            return null;
         }
 
         static void MostSuccessfulInSchool()
@@ -506,7 +510,7 @@ namespace G004_OgrenciYonetimUygulamasi
             ListHeader();
             foreach (var student in SM.GetMostSuccessful())
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count,5}");
+                DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
@@ -515,44 +519,49 @@ namespace G004_OgrenciYonetimUygulamasi
             ListHeader();
             foreach (var student in SM.GetMostFailure())
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count,5}");
+                DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
         static void MostSuccessfulInClass()
         {
-            ListHeader();
             Console.Write("Görmek istediğiniz şubeyi girin: ");
             string className = Console.ReadLine();
+            ListHeader();
             foreach (var student in SM.GetMostSuccessfulInClass(className))
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count,5}");
+                DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
         static void MostFailureInClass()
         {
-            ListHeader();
             Console.Write("Görmek istediğiniz şubeyi girin: ");
             string className = Console.ReadLine();
+            ListHeader();
             foreach (var student in SM.GetMostFailureInClass(className))
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count,5}");
+                DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
         static void StudentsByGender()
         {
             ListHeader();
-            foreach ( var student in SM.StudentsByGender())
+            foreach (var student in SM.StudentsByGender())
             {
-                Console.WriteLine($"{student.ClassName,5}{student.Name,25} {student.GA,15} {student.Books.Count,5}");
+                Console.WriteLine($"{student.ClassName,10}{student.Name + " " + student.Surname,25} {student.GA,15} {student.Books.Count,20}");
             }
+        }
+
+        static void DataWriter(string className, string name, string surname, float ga, int bookCount)
+        {
+            Console.WriteLine($"{className,10}{name + " " + surname,25}{ga,15}{bookCount,5}");
         }
 
         static void ListHeader()
         {
-            Console.WriteLine("Şube No     Adı Soyadı         Not Ort.     Okuduğu Kitap Say.");
-            Console.WriteLine("-------    -----------        ----------    ------------------");
+            Console.WriteLine("{0}{1}{2}{3}", "Şube No".PadLeft(10), "Adı Soyadı".PadLeft(25), "Not Ort.".PadLeft(15), "Okuduğu Kitap Say.".PadLeft(20));
+            Console.WriteLine("----------------------------------------------------------------------");
         }
     }
 }

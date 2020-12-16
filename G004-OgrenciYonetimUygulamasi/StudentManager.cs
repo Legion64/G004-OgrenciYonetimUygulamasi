@@ -21,8 +21,8 @@ namespace G004_OgrenciYonetimUygulamasi
         {
             Students.Add(new Student(1, "Melih", "Budak", RandomDay(), Gender.E, "A"));
             Students.Add(new Student(2, "Akın Can", "Cesaretli", RandomDay(), Gender.E, "A"));
-            Students.Add(new Student(3, "Ozan", "Akyüz", RandomDay(), Gender.E, "A"));
-            Students.Add(new Student(4, "Muhammed Taha", "Özdoğan", RandomDay(), Gender.E, "A"));
+            Students.Add(new Student(3, "Ozan", "Akyüz", RandomDay(), Gender.E, "B"));
+            Students.Add(new Student(4, "Muhammed Taha", "Özdoğan", RandomDay(), Gender.E, "B"));
         }
 
         DateTime RandomDay()
@@ -31,8 +31,6 @@ namespace G004_OgrenciYonetimUygulamasi
             int range = (DateTime.Today - start).Days;
             return start.AddDays(Rand.Next(range));
         }
-
-        // Bu sınıf verinin işleneceği sınıf
 
         public void AddNote(int id, LessonName lessonName, int[] notes)
         {
