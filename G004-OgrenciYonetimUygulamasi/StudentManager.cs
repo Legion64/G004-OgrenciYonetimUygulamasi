@@ -39,7 +39,7 @@ namespace G004_OgrenciYonetimUygulamasi
         {
             Student student = GetStudent(id);
 
-            if(student != null)
+            if (student != null)
             {
                 foreach (var item in notes)
                 {
@@ -68,6 +68,17 @@ namespace G004_OgrenciYonetimUygulamasi
             return Students[index];
         }
 
+        public List<string> GetEvalaution(int id)
+        {
+            Student student = GetStudent(id);
+            return student.Reviews;
+        }
+
+        public void AddEvalaution(int id, string text)
+        {
+            Student student = GetStudent(id);
+            student.Reviews.Add(text);
+        }
         public bool HasStudent(int id)
         {
             Student student = Students.Where(x => x.ID == id).FirstOrDefault();
@@ -76,6 +87,9 @@ namespace G004_OgrenciYonetimUygulamasi
                 return true;
             return false;
         }
+
+
+
         public void AddStudent(string name, string surname, DateTime birthDate, Gender gender , int Id ,string className)
         {
             Random rnd = new Random();

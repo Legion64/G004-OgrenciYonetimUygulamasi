@@ -79,11 +79,12 @@ namespace G004_OgrenciYonetimUygulamasi
                         case 15:
 
                             break;
-                        case 16:
 
+                        case 16:
+                            AddStudentEvaluation();
                             break;
                         case 17:
-
+                            GetStudentEvaluation();
                             break;
                         case 18:
 
@@ -294,6 +295,62 @@ namespace G004_OgrenciYonetimUygulamasi
             }
         }
 
+        static void AddStudentEvaluation()
+        {
+
+            while (true)
+            {
+                Console.Write("Ogrenci Numarası: ");
+                if (int.TryParse(Console.ReadLine(), out int id))
+                {
+                    if (SM.HasStudent(id))
+                    {
+                        Console.WriteLine("Öğrenci hakkında değerlendirme giriniz.");
+                        string evaluation = Console.ReadLine();
+                        SM.AddEvalaution(id, evaluation);
+
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sayı tipinde bir değişken girmelisiniz");
+                }
+            }
+        }
+
+        static void GetStudentEvaluation()
+        {
+            while (true)
+            {
+                Console.Write("Ogrenci Numarası : ");
+                if (int.TryParse(Console.ReadLine(), out int id))
+                {
+                    if (SM.HasStudent(id))
+                    {
+                        int i = 0;
+                        foreach (var item in SM.GetStudent(id).Reviews)
+                        {
+                            i++;
+                            Console.WriteLine("{0} - {1}", i, item);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sayı tipinde bir değişken girmelisiniz");
+                }
+            }
+        }
         static void ExitApp()
         {
             Environment.Exit(0);
