@@ -87,10 +87,10 @@ namespace G004_OgrenciYonetimUygulamasi
                             GetStudentEvaluation();
                             break;
                         case 18:
-
+                            AddBooks();
                             break;
                         case 19:
-
+                            GetBooks();
                             break;
                         case 20:
 
@@ -351,6 +351,87 @@ namespace G004_OgrenciYonetimUygulamasi
                 }
             }
         }
+
+        static void AddBooks()
+        {
+            while (true)
+            {
+                Console.Write("Ogrenci Numarası: ");
+                if (int.TryParse(Console.ReadLine(), out int id))
+                {
+                    if (SM.HasStudent(id))
+                    {
+                        Console.WriteLine("Kitap giriniz.");
+                        string book = Console.ReadLine();
+                        SM.AddBooks(id,book);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sayı tipinde bir değişken girmelisiniz");
+                }
+            }
+        }
+        
+        static void GetBooks()
+        {
+            while (true)
+            {
+                Console.Write("Ogrenci Numarası : ");
+                if (int.TryParse(Console.ReadLine(), out int id))
+                {
+                    if (SM.HasStudent(id))
+                    {
+                        int i = 0;
+                        foreach (var item in SM.GetStudent(id).Books)
+                        {
+                            i++;
+                            Console.WriteLine("{0} - {1}", i, item);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sayı tipinde bir değişken girmelisiniz");
+                }
+            }
+        }
+
+        static void GetLastBook()
+        {
+        while (true)
+            {
+                Console.Write("Ogrenci Numarası : ");
+                if (int.TryParse(Console.ReadLine(), out int id))
+                {
+                    if (SM.HasStudent(id))
+                    {
+                        
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sayı tipinde bir değişken girmelisiniz");
+                }
+            }
+        }
+
+
         static void ExitApp()
         {
             Environment.Exit(0);

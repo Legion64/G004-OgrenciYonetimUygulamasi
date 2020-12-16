@@ -79,6 +79,12 @@ namespace G004_OgrenciYonetimUygulamasi
             Student student = GetStudent(id);
             student.Reviews.Add(text);
         }
+
+        public void AddBooks(int id , string book)
+        {
+            Student student = GetStudent(id);
+            student.Books.Add(book);
+        }
         public bool HasStudent(int id)
         {
             Student student = Students.Where(x => x.ID == id).FirstOrDefault();
