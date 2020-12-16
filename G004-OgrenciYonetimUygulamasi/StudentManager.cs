@@ -63,9 +63,7 @@ namespace G004_OgrenciYonetimUygulamasi
 
         public Student GetStudent(int id)
         {
-            int index = Students.FindIndex(x => x.ID == id);
-
-            return Students[index];
+            return Students.Where(x => x.ID == id).FirstOrDefault();
         }
 
         public List<string> GetEvalaution(int id)
