@@ -1,6 +1,5 @@
 ﻿using G004_OgrenciYonetimUygulamasi.component;
 using System;
-using System.Linq.Expressions;
 
 namespace G004_OgrenciYonetimUygulamasi
 {
@@ -79,7 +78,6 @@ namespace G004_OgrenciYonetimUygulamasi
                         case 15:
 
                             break;
-
                         case 16:
                             AddStudentEvaluation();
                             break;
