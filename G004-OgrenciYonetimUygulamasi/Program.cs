@@ -436,5 +436,30 @@ namespace G004_OgrenciYonetimUygulamasi
         {
             Environment.Exit(0);
         }
+
+
+
+
+        static void AddStudent()
+        {
+            StudentManager ogrenci = new StudentManager();
+
+            Console.Write("Öğrencinin numarası: ");
+            bool dorumunumara = int.TryParse(Console.ReadLine() , out int numara);
+            Console.Write("Öğrencinin adı:  ");
+            string ad = Console.ReadLine();
+            Console.Write("Öğrencinin soyadı:  ");
+            string soyad = Console.ReadLine();
+            Console.Write("Öğrencinin doğum tarihi:  ");
+            bool dorumutarih = DateTime.TryParse(Console.ReadLine() , out DateTime dogumTarihi);
+            Console.Write("Öğrencinin cinsiyeti:  ");
+            string cinsiyet = Console.ReadLine();
+            Gender gender = (Gender)Enum.Parse(typeof(Gender), cinsiyet);
+            Console.Write("Öğrencinin şubesi:  ");
+            string sınıf = Console.ReadLine();
+
+            ogrenci.AddStudent(ad, soyad , dogumTarihi, gender, numara, sınıf);
+
+        }
     }
 }
