@@ -84,6 +84,47 @@ namespace G004_OgrenciYonetimUygulamasi
 
         }
 
+        public List<Student> GetMostSuccessful()
+        {
+            return Students.OrderBy(x => x.GA).Take(5).ToList();
+        }
+
+        public List<Student> GetMostFailure()
+        {
+            return Students.OrderByDescending(x => x.GA).Take(3).ToList();
+        }
+
+        public List<Student> GetMostSuccessfulInClass(string className)
+        {
+            return Students.Where(x => x.ClassName == className.ToUpper()).OrderBy(x => x.GA).Take(5).ToList();
+        }
+
+        public List<Student> GetMostFailureInClass(string className)
+        {
+            return Students.Where(x => x.ClassName == className.ToUpper()).OrderByDescending(x => x.GA).Take(3).ToList();
+        }
+        
+        public List<Student> StudentsByClass(string className)
+        {
+            return Students.Where(x => x.ClassName == className.ToUpper()).ToList();
+        }
+        
+        public List<Student> StudentsByGender()
+        {
+            return Students.OrderBy(x => x.Gender).ToList();
+        }
+        
+        public List<Student> BirthDateListing(DateTime date)
+        {
+            return Students.Where(x => x.BirthDate > date).OrderBy(x => x.BirthDate).ToList();
+        } 
+
+
+        public List<Student> GetNeighborhood()
+        {
+            return Students.OrderBy(x => x.Address.Neighborhood).ToList();
+        }
+
         public string GetLastBook(int id)
         {
             Student student = GetStudent(id);

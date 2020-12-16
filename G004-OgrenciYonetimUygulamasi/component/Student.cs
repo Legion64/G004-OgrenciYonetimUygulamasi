@@ -17,7 +17,18 @@ namespace G004_OgrenciYonetimUygulamasi.component
 
         public Gender Gender { get; set; }
 
-        public string ClassName { get; set; }
+        private string _ClassName;
+        public string ClassName
+        {
+            get
+            {
+                return _ClassName;
+            }
+            set
+            {
+                _ClassName = value.ToUpper();
+            }
+        }
 
 
         public float GA
@@ -55,6 +66,8 @@ namespace G004_OgrenciYonetimUygulamasi.component
             Lessons = new List<Lesson>();
             Reviews = new List<string>();
             Books = new List<string>();
+
+            ClassName = "a";
         }
 
 
