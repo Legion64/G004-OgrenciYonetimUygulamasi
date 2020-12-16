@@ -297,18 +297,19 @@ namespace G004_OgrenciYonetimUygulamasi
 
         static void AddStudentEvaluation()
         {
-            
-            while(true)
+
+            while (true)
             {
-                Console.Write("Ogrenci Numarası : ");
-                if(int.TryParse(Console.ReadLine(), out int id)
+                Console.Write("Ogrenci Numarası: ");
+                if (int.TryParse(Console.ReadLine(), out int id))
                 {
-                    if(SM.HasStudent(id))
+                    if (SM.HasStudent(id))
                     {
                         Console.WriteLine("Öğrenci hakkında değerlendirme giriniz.");
                         string evaluation = Console.ReadLine();
-                        SM.AddEvalaution(id,evaluation);
-                        break ;
+                        SM.AddEvalaution(id, evaluation);
+
+                        break;
                     }
                     else
                     {
@@ -324,19 +325,20 @@ namespace G004_OgrenciYonetimUygulamasi
 
         static void GetStudentEvaluation()
         {
-            while(true)
+            while (true)
             {
                 Console.Write("Ogrenci Numarası : ");
-                if(int.TryParse(Console.ReadLine(), out int id)
+                if (int.TryParse(Console.ReadLine(), out int id))
                 {
-                    if(SM.HasStudent(id))
+                    if (SM.HasStudent(id))
                     {
-                        int i=0 ;
-                        foreach(var item in SM.GetStudent(id).Reviews)
+                        int i = 0;
+                        foreach (var item in SM.GetStudent(id).Reviews)
                         {
-                            i++ ;
-                            Console.WriteLine("{0} - {1}",i,item);
-                        } 
+                            i++;
+                            Console.WriteLine("{0} - {1}", i, item);
+                        }
+                        break;
                     }
                     else
                     {
@@ -349,9 +351,6 @@ namespace G004_OgrenciYonetimUygulamasi
                 }
             }
         }
-
-        }
-
         static void ExitApp()
         {
             Environment.Exit(0);

@@ -39,7 +39,7 @@ namespace G004_OgrenciYonetimUygulamasi
         {
             Student student = GetStudent(id);
 
-            if(student != null)
+            if (student != null)
             {
                 foreach (var item in notes)
                 {
@@ -74,7 +74,7 @@ namespace G004_OgrenciYonetimUygulamasi
             return student.Reviews;
         }
 
-        public void AddEvalaution(int id,string text)
+        public void AddEvalaution(int id, string text)
         {
             Student student = GetStudent(id);
             student.Reviews.Add(text);
