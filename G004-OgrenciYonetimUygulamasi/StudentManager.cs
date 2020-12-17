@@ -82,6 +82,22 @@ namespace G004_OgrenciYonetimUygulamasi
 
         }
 
+        public List<Lesson> GetStudentNote(int id)
+        {
+            return GetStudent(id).Lessons.OrderBy(x => x._Lesson).ToList();
+        }
+
+        public float? GetGAInClass(string className)
+        {
+            IEnumerable<Student> notes = Students.Where(x => x.ClassName == className.ToUpper());
+            if (notes.Count() > 0)
+            {
+                return notes.Average(x => x.GA);
+            }
+
+            return null;
+        }
+
         public List<Student> GetMostSuccessful()
         {
             return Students.OrderBy(x => x.GA).Take(5).ToList();
@@ -107,9 +123,9 @@ namespace G004_OgrenciYonetimUygulamasi
             return Students.Where(x => x.ClassName == className.ToUpper()).ToList();
         }
         
-        public List<Student> StudentsByGender()
+        public List<Student> StudentsByGender(Gender gender)
         {
-            return Students.OrderBy(x => x.Gender).ToList();
+            return Students.Where(x => x.Gender == gender).OrderBy(x => x.Gender).ToList();
         }
         
         public List<Student> BirthDateListing(DateTime date)
