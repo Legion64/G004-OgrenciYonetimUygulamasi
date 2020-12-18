@@ -341,8 +341,9 @@ namespace G004_OgrenciYonetimUygulamasi
                         foreach (var item in SM.GetStudent(id).Reviews)
                         {
                             i++;
-                            Console.WriteLine("\n {0} - {1}\n", i, item);
+                            Console.WriteLine("\n {0} - {1}", i, item);
                         }
+                        Console.WriteLine();
                         break;
                     }
                     else
