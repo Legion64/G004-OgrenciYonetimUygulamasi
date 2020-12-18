@@ -477,7 +477,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Utils.ListHeader();
             foreach (var student in SM.Students)
             {
-                Utils.DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+                Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
@@ -488,7 +488,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Utils.ListHeader();
             foreach (var student in SM.StudentsByClass(className))
             {
-                Utils.DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+                Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
@@ -497,7 +497,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Utils.ListHeader();
             foreach (var student in SM.GetNeighborhood())
             {
-                Utils.DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+                Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
 
         }
@@ -516,7 +516,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Utils.ListHeader();
             foreach (var student in SM.BirthDateListing(birthDate))
             {
-                Utils.DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+                Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
 
             return null;
@@ -527,7 +527,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Utils.ListHeader();
             foreach (var student in SM.GetMostSuccessful())
             {
-                Utils.DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+                Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
@@ -536,7 +536,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Utils.ListHeader();
             foreach (var student in SM.GetMostFailure())
             {
-                Utils.DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+                Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
         static void MostSuccessfulInClass()
@@ -546,7 +546,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Utils.ListHeader();
             foreach (var student in SM.GetMostSuccessfulInClass(className))
             {
-                Utils.DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+                Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
@@ -557,7 +557,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Utils.ListHeader();
             foreach (var student in SM.GetMostFailureInClass(className))
             {
-                Utils.DataWriter(student.ClassName, student.Name, student.Surname, student.GA, student.Books.Count);
+                Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
 
@@ -696,16 +696,16 @@ namespace G004_OgrenciYonetimUygulamasi
                 }
                 else
                 {
-                    Console.Write("Geçerli bir değer giriniz:  ");
+                    Console.Write("Geçerli bir değer giriniz: ");
                 }
             } while (timer == 0);
-            Console.Write("Öğrencinin adı:  ");
+            Console.Write("Öğrencinin adı: ");
             string ad = Console.ReadLine();
-            Console.Write("Öğrencinin soyadı:  ");
+            Console.Write("Öğrencinin soyadı: ");
             string soyad = Console.ReadLine();
-            Console.Write("Öğrencinin doğum tarihi:  ");
+            Console.Write("Öğrencinin doğum tarihi: ");
             bool dorumutarih = DateTime.TryParse(Console.ReadLine(), out DateTime dogumTarihi);
-            Console.Write("Öğrencinin cinsiyeti K/E:  ");
+            Console.Write("Öğrencinin cinsiyeti K/E: ");
             string cinsiyet = Console.ReadLine();
             Gender gender = student.Gender;
             do

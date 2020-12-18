@@ -187,7 +187,7 @@ namespace G004_OgrenciYonetimUygulamasi
             {
                 x.BirthDate = birthDate;
             }
-            if (gender != null)
+            if (gender != Gender.Undefined)
             {
                 x.Gender = gender;
             }

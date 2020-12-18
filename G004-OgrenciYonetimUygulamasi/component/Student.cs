@@ -73,6 +73,7 @@ namespace G004_OgrenciYonetimUygulamasi.component
 
     public enum Gender
     {
+        Undefined,
         E,
         K
     }
