@@ -171,6 +171,36 @@ namespace G004_OgrenciYonetimUygulamasi
             return (student);
         }
 
+
+        public Student UpdateStudent(Student x,string name, string surname, DateTime birthDate, Gender gender, string className)
+        {
+
+            if (name != "")
+            {
+                x.Name = name;
+            }
+            if (surname != "")
+            {
+                x.Surname = surname;
+            }
+            if (birthDate != null)
+            {
+                x.BirthDate = birthDate;
+            }
+            if (gender != null)
+            {
+                x.Gender = gender;
+            }
+            if (className != "")
+            {
+                x.ClassName = className;
+
+            }
+
+
+
+            return x;
+        }
        
     }
 }

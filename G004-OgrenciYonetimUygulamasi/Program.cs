@@ -94,7 +94,7 @@ namespace G004_OgrenciYonetimUygulamasi
                             DeleteStudent();
                             break;
                         case 22:
-
+                            UpdateStudent();
                             break;
                         default:
                             Console.WriteLine("Herhangi bir seçim yapmadınız!");
@@ -585,6 +585,7 @@ namespace G004_OgrenciYonetimUygulamasi
 
         static void AddStudent()
         {
+
             Console.Write("Öğrencinin numarası: ");
             bool dorumunumara = int.TryParse(Console.ReadLine(), out int numara);
             Console.Write("Öğrencinin adı:  ");
@@ -593,15 +594,150 @@ namespace G004_OgrenciYonetimUygulamasi
             string soyad = Console.ReadLine();
             Console.Write("Öğrencinin doğum tarihi:  ");
             bool dorumutarih = DateTime.TryParse(Console.ReadLine(), out DateTime dogumTarihi);
-            Console.Write("Öğrencinin cinsiyeti:  ");
+            Console.Write("Öğrencinin cinsiyeti K/E:  ");
             string cinsiyet = Console.ReadLine();
-            Gender gender = (Gender)Enum.Parse(typeof(Gender), cinsiyet);
+            Gender gender;
+            do
+            {
+                try
+                {
+                    gender = (Gender)Enum.Parse(typeof(Gender), cinsiyet.ToUpper());
+                    break;
+                }
+                catch (Exception)
+                {
+                    Console.Write("Geçerli bir değer giriniz");
+                    cinsiyet = Console.ReadLine();
+                }
+            } while (true);
+
             Console.Write("Öğrencinin şubesi:  ");
             string sınıf = Console.ReadLine();
+            foreach (Student x in SM.Students)
+            {
+                if (x.ID == numara)
+                {
+                    Console.WriteLine("35 numaralı öğrenci sisteme başarılı bir şekilde eklenmiştir.Sistemde {0} numaralı öğrenci olduğu için verdiğiniz öğrenci no {1} olarak değiştirildi.", numara, numara + 1);
+                    numara += 1;
+                    break;
+                }
+            }
 
             SM.AddStudent(ad, soyad, dogumTarihi, gender, numara, sınıf);
 
+            Console.WriteLine("Öğrendi eklendi");
+
         }
+
+        static void DeleteStudent()
+        {
+            Console.Write("Silmek istediğiniz öğrencinin numarasını girin:  ");
+            int timer = 0;
+            do
+            {
+                bool numcontrol = int.TryParse(Console.ReadLine(), out int Id);
+                if (numcontrol)
+                {
+                    foreach (Student x in SM.Students)
+                    {
+                        if (x.ID == Id)
+                        {
+
+                            Console.WriteLine("{0} numaralı öğrenci başarılı bir şekilde silindi.", Id);
+                            SM.Students.Remove(SM.GetStudent(Id));
+                            timer += 1;
+                            break;
+                        }
+                    }
+                    if (timer == 0)
+                    {
+                        Console.Write("Girdiğiniz numaraya ait öğrenci bulunmamakta.");
+                        Console.WriteLine("Ana menüye yönlendiriliyorsunuz...");
+                        break;
+                    }
+
+                }
+                else
+                {
+                    Console.Write("Geçerli bir değer giriniz:  ");
+                }
+            } while (timer == 0);
+        }
+
+
+
+        static void UpdateStudent()
+        {
+            Student student = new Student();
+            Console.Write("Öğrencinin numarası: ");
+            int timer = 0;
+            
+            do
+            {
+                bool numcontrol = int.TryParse(Console.ReadLine(), out int Id);
+                if (numcontrol)
+                {
+                    foreach (Student x in SM.Students)
+                    {
+                        if (x.ID == Id)
+                        {
+                            student = x;
+                            timer += 1;
+                            break;
+                        }
+                    }
+                    if (timer == 0)
+                    {
+                        Console.Write("Girdiğiniz numaraya ait öğrenci bulunmamakta.");
+                        Console.WriteLine("Ana menüye yönlendiriliyorsunuz...");
+                        break;
+                    }
+
+                }
+                else
+                {
+                    Console.Write("Geçerli bir değer giriniz:  ");
+                }
+            } while (timer == 0);
+            Console.Write("Öğrencinin adı:  ");
+            string ad = Console.ReadLine();
+            Console.Write("Öğrencinin soyadı:  ");
+            string soyad = Console.ReadLine();
+            Console.Write("Öğrencinin doğum tarihi:  ");
+            bool dorumutarih = DateTime.TryParse(Console.ReadLine(), out DateTime dogumTarihi);
+            Console.Write("Öğrencinin cinsiyeti K/E:  ");
+            string cinsiyet = Console.ReadLine();
+            Gender gender = student.Gender;
+            do
+            {
+                if(cinsiyet != "")
+                {
+                    try
+                    {
+                        gender = (Gender)Enum.Parse(typeof(Gender), cinsiyet.ToUpper());
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.Write("Geçerli bir değer giriniz");
+                        cinsiyet = Console.ReadLine();
+                    }
+                }
+                else
+                {
+                    break;
+                }
+               
+            } while (true);
+            Console.Write("Öğrencinin şubesi:  ");
+            string sınıf = Console.ReadLine();
+            
+
+            SM.UpdateStudent(student,ad,soyad,dogumTarihi,gender,sınıf);
+            Console.WriteLine("Öğrendi güncellendi");
+        }
+
+
 
 
 
