@@ -19,10 +19,51 @@ namespace G004_OgrenciYonetimUygulamasi
 
         public void FakeData()
         {
-            Students.Add(new Student(1, "Melih", "Budak", RandomDay(), Gender.E, "A"));
-            Students.Add(new Student(2, "Akın Can", "Cesaretli", RandomDay(), Gender.E, "A"));
-            Students.Add(new Student(3, "Ozan", "Akyüz", RandomDay(), Gender.E, "B"));
-            Students.Add(new Student(4, "Muhammed Taha", "Özdoğan", RandomDay(), Gender.E, "B"));
+            Random rnd = new Random();
+
+            Student ogr1 = new Student(1, "Melih", "Budak", RandomDay(), Gender.E, "A");
+            Lesson lesson1 = new Lesson(LessonName.Matematik, rnd.Next(0, 100));
+            Lesson lesson2 = new Lesson(LessonName.Fizik, rnd.Next(0, 100));
+            Lesson lesson3 = new Lesson(LessonName.Biyoloji, rnd.Next(0, 100));
+            Lesson lesson4 = new Lesson(LessonName.Kimya, rnd.Next(0, 100));
+            ogr1.Lessons.Add(lesson1);
+            ogr1.Lessons.Add(lesson2);
+            ogr1.Lessons.Add(lesson3);
+            ogr1.Lessons.Add(lesson4);
+            Students.Add(ogr1);
+
+            Student ogr2 = new Student(2, "Akın Can", "Cesaretli", RandomDay(), Gender.E, "A");
+            Lesson lesson5 = new Lesson(LessonName.Matematik, rnd.Next(0, 100));
+            Lesson lesson6 = new Lesson(LessonName.Fizik, rnd.Next(0, 100));
+            Lesson lesson7 = new Lesson(LessonName.Biyoloji, rnd.Next(0, 100));
+            Lesson lesson8 = new Lesson(LessonName.Kimya, rnd.Next(0, 100));
+            ogr2.Lessons.Add(lesson5);
+            ogr2.Lessons.Add(lesson6);
+            ogr2.Lessons.Add(lesson7);
+            ogr2.Lessons.Add(lesson8);
+            Students.Add(ogr2);
+
+            Student ogr3 = new Student(3, "Ozan", "Akyüz", RandomDay(), Gender.E, "B");
+            Lesson lesson9 = new Lesson(LessonName.Matematik, rnd.Next(0, 100));
+            Lesson lesson10 = new Lesson(LessonName.Fizik, rnd.Next(0, 100));
+            Lesson lesson11 = new Lesson(LessonName.Biyoloji, rnd.Next(0, 100));
+            Lesson lesson12 = new Lesson(LessonName.Kimya, rnd.Next(0, 100));
+            ogr3.Lessons.Add(lesson9);
+            ogr3.Lessons.Add(lesson10);
+            ogr3.Lessons.Add(lesson11);
+            ogr3.Lessons.Add(lesson12);
+            Students.Add(ogr3);
+
+            Student ogr4 = new Student(4, "Muhammed Taha", "Özdoğan", RandomDay(), Gender.E, "B");
+            Lesson lesson13 = new Lesson(LessonName.Matematik, rnd.Next(0, 100));
+            Lesson lesson14 = new Lesson(LessonName.Fizik, rnd.Next(0, 100));
+            Lesson lesson15 = new Lesson(LessonName.Biyoloji, rnd.Next(0, 100));
+            Lesson lesson16 = new Lesson(LessonName.Kimya, rnd.Next(0, 100));
+            ogr4.Lessons.Add(lesson13);
+            ogr4.Lessons.Add(lesson14);
+            ogr4.Lessons.Add(lesson15);
+            ogr4.Lessons.Add(lesson16);
+            Students.Add(ogr4);
         }
 
         DateTime RandomDay()
@@ -100,22 +141,22 @@ namespace G004_OgrenciYonetimUygulamasi
 
         public List<Student> GetMostSuccessful()
         {
-            return Students.OrderBy(x => x.GA).Take(5).ToList();
+            return Students.OrderByDescending(x => x.GA).Take(5).ToList();
         }
 
         public List<Student> GetMostFailure()
         {
-            return Students.OrderByDescending(x => x.GA).Take(3).ToList();
+            return Students.OrderBy(x => x.GA).Take(3).ToList();
         }
 
         public List<Student> GetMostSuccessfulInClass(string className)
         {
-            return Students.Where(x => x.ClassName == className.ToUpper()).OrderBy(x => x.GA).Take(5).ToList();
+            return Students.Where(x => x.ClassName == className.ToUpper()).OrderByDescending(x => x.GA).Take(5).ToList();
         }
 
         public List<Student> GetMostFailureInClass(string className)
         {
-            return Students.Where(x => x.ClassName == className.ToUpper()).OrderByDescending(x => x.GA).Take(3).ToList();
+            return Students.Where(x => x.ClassName == className.ToUpper()).OrderBy(x => x.GA).Take(3).ToList();
         }
         
         public List<Student> StudentsByClass(string className)

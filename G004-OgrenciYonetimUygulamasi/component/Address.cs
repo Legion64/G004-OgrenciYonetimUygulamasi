@@ -13,6 +13,10 @@ namespace G004_OgrenciYonetimUygulamasi.component
 
         public string Neighborhood { get; set; }
 
+        public Address()
+        {
+
+        }
 
         public Address(string province, string district, string neighborhood)
         {

@@ -66,6 +66,7 @@ namespace G004_OgrenciYonetimUygulamasi.component
             Lessons = new List<Lesson>();
             Reviews = new List<string>();
             Books = new List<string>();
+            Address = new Address();
         }
 
 
