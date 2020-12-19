@@ -540,7 +540,7 @@ namespace G004_OgrenciYonetimUygulamasi
                 Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
             }
         }
-
+        
         static void MostFailureInSchool()
         {
             Utils.ListHeader();

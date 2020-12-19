@@ -5,17 +5,8 @@ using System.Text;
 
 namespace G004_OgrenciYonetimUygulamasi.component
 {
-    class Student
+    class Student : Kisi
     {
-        public int ID { get; set; }
-
-        public string Name { get; set; }
-
-        public string Surname { get; set; }
-
-        public DateTime BirthDate { get; set; }
-
-        public Gender Gender { get; set; }
 
         private string _ClassName;
         public string ClassName
@@ -60,7 +51,7 @@ namespace G004_OgrenciYonetimUygulamasi.component
             Name = name;
             Surname = surname;
             BirthDate = birthDate;
-            Gender = gender;
+            this.gender = gender;
             ClassName = className;
 
             Lessons = new List<Lesson>();
@@ -72,11 +63,6 @@ namespace G004_OgrenciYonetimUygulamasi.component
 
     }
 
-    public enum Gender
-    {
-        Undefined,
-        E,
-        K
-    }
+    
 
 }
