@@ -8,13 +8,13 @@ namespace G004_OgrenciYonetimUygulamasi.component
     {
         public static void DataWriter(string className, int id, string name, string surname, float ga, int bookCount)
         {
-            Console.WriteLine($"{className,10}{id,10}{name + " " + surname,25}{ga,15}{bookCount,20}");
+            Console.WriteLine($"{className,-7}{id,-5}{name + " " + surname,-25}{ga,-15}{bookCount,-20}");
         }
 
         public static void ListHeader()
         {
-            Console.WriteLine("{0}{1}{2}{3}{4}", "Şube".PadLeft(10), "No".PadLeft(10), "Adı Soyadı".PadLeft(25), "Not Ort.".PadLeft(15), "Okuduğu Kitap Say.".PadLeft(20));
-            Console.WriteLine("--------------------------------------------------------------------------------");
+            Console.WriteLine($"{"Şube",-7}{"No",-5}{"Adı Soyadı",-25}{"Not Ort.",-15}{"Okuduğu Kitap Say.",-20}");
+            Console.WriteLine("------------------------------------------------------------------------");
         }
 
     }

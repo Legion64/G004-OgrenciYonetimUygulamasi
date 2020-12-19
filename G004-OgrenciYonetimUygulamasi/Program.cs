@@ -142,15 +142,15 @@ namespace G004_OgrenciYonetimUygulamasi
         static void Menu()
         {
             Console.WriteLine("\t\t\tÖğrenci Yönetim Paneli\n");
-            Console.WriteLine("1  - Öğrenci Gir");
-            Console.WriteLine("2  - Not Gir");
-            Console.WriteLine("3  - Öğrencinin ortalamasını gör");
-            Console.WriteLine("4  - Öğrencinin adresini gir");
-            Console.WriteLine("5  - Bütün Öğrencileri Listele");
-            Console.WriteLine("6  - Şubeye Göre Öğrencileri Listele");
-            Console.WriteLine("7  - Öğrencinin notlarını görüntüle");
-            Console.WriteLine("8  - Sınıfın not ortalamasını gör");
-            Console.WriteLine("9  - Cinsiyetine göre öğrenci listele");
+            Console.WriteLine(" 1 - Öğrenci Gir");
+            Console.WriteLine(" 2 - Not Gir");
+            Console.WriteLine(" 3 - Öğrencinin ortalamasını gör");
+            Console.WriteLine(" 4 - Öğrencinin adresini gir");
+            Console.WriteLine(" 5 - Bütün Öğrencileri Listele");
+            Console.WriteLine(" 6 - Şubeye Göre Öğrencileri Listele");
+            Console.WriteLine(" 7 - Öğrencinin notlarını görüntüle");
+            Console.WriteLine(" 8 - Sınıfın not ortalamasını gör");
+            Console.WriteLine(" 9 - Cinsiyetine göre öğrenci listele");
             Console.WriteLine("10 - Şu tarihten sonra doğan öğrencileri listele");
             Console.WriteLine("11 - Tüm öğrencileri semtlerine göre sıralayarak listele");
             Console.WriteLine("12 - Okuldaki En başarılı 5 öğrenciyi listele");
@@ -338,10 +338,16 @@ namespace G004_OgrenciYonetimUygulamasi
                     if (SM.HasStudent(id))
                     {
                         int i = 0;
-                        foreach (var item in SM.GetStudent(id).Reviews)
+                        
+                        if(!(SM.GetStudent(id).Reviews.Count > 0))
+                            Console.WriteLine("Bu öğrenciye ait değerlendirme bulunamadı!");
+                        else
                         {
-                            i++;
-                            Console.WriteLine("\n {0} - {1}", i, item);
+                            foreach (var item in SM.GetStudent(id).Reviews)
+                            {
+                                i++;
+                                Console.WriteLine("\n {0} - {1}", i, item);
+                            }
                         }
                         Console.WriteLine();
                         break;
@@ -394,10 +400,15 @@ namespace G004_OgrenciYonetimUygulamasi
                     if (SM.HasStudent(id))
                     {
                         int i = 0;
-                        foreach (var item in SM.GetStudent(id).Books)
+                        if (!(SM.GetStudent(id).Books.Count > 0))
+                            Console.WriteLine("Bu öğrenciye ait okunmuş kitap bulunamadı!");
+                        else
                         {
-                            i++;
-                            Console.WriteLine("\n{0} - {1}", i, item);
+                            foreach (var item in SM.GetStudent(id).Books)
+                            {
+                                i++;
+                                Console.WriteLine("\n{0} - {1}", i, item);
+                            }
                         }
                         Console.WriteLine();
                         break;
@@ -423,7 +434,10 @@ namespace G004_OgrenciYonetimUygulamasi
                 {
                     if (SM.HasStudent(id))
                     {
-                        Console.WriteLine("Öğrencinin okuduğu son kitap: {0} ", SM.GetLastBook(id));
+                        if(SM.GetStudent(id).Books.Count > 0)
+                            Console.WriteLine("Öğrencinin okuduğu son kitap: {0} ", SM.GetLastBook(id));
+                        else
+                            Console.WriteLine("Bu öğrenci için okunmuş kitap bulunamadı!\n");
                         break;
                     }
                     else
@@ -582,7 +596,7 @@ namespace G004_OgrenciYonetimUygulamasi
                     Utils.ListHeader();
                     foreach (var student in SM.StudentsByGender(gender))
                     {
-                        Console.WriteLine($"{student.ClassName,10}{student.Name + " " + student.Surname,25} {student.GA,15} {student.Books.Count,20}");
+                        Utils.DataWriter(student.ClassName, student.ID, student.Name, student.Surname, student.GA, student.Books.Count);
                     }
                     break;
                 }
@@ -663,7 +677,7 @@ namespace G004_OgrenciYonetimUygulamasi
             Console.Write("Öğrencinin şubesi:  ");
             string className = Console.ReadLine();
 
-            if(tempNumber != number)
+            if (tempNumber != number)
                 Console.WriteLine("Sistemde {0} numaralı öğrenci olduğu için verdiğiniz öğrenci no {1} olarak değiştirildi.", number, tempNumber);
             else
                 Console.WriteLine("{0} numaralı öğrenci sisteme başarılı bir şekilde eklenmiştir.", tempNumber);
@@ -689,7 +703,8 @@ namespace G004_OgrenciYonetimUygulamasi
                     if (!SM.HasStudent(id))
                     {
                         Console.WriteLine("Girdiğiniz numaraya ait öğrenci bulunamadı!");
-                    }else
+                    }
+                    else
                         break;
                 }
             }
@@ -697,7 +712,7 @@ namespace G004_OgrenciYonetimUygulamasi
             SM.Students.Remove(SM.GetStudent(id));
             Console.WriteLine("{0} numaralı öğrenci başarılı bir şekilde silindi.", id);
         }
-        
+
         static void UpdateStudent()
         {
             Student student = null;
